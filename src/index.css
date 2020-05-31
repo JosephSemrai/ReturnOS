@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'MS Sans Serif';
+  src: url(./static/fonts/MSSansSerif.woff2) format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: 'MS Sans Serif';
+  src: url(./static/fonts/MSSansSerifBold.woff2) format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: fallback;
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  overflow: hidden;
+}
