@@ -98,10 +98,7 @@ const AppCloseButton = () => {
   const { endTask } = useTaskManager();
   if (app.canClose === null) return null;
   return (
-    <CloseButton
-      disabled={app.canClose === false}
-      onClick={() => endTask(app.id)}
-    />
+    <CloseButton disabled={!app.canClose} onClick={() => endTask(app.id)} />
   );
 };
 

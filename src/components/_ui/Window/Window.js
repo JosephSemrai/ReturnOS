@@ -98,9 +98,12 @@ const Window = ({
     }
   });
 
+  // Change active task to the window on mousedown of the window
   useEventListener(app.windowRef, 'mousedown', () =>
     setTaskActiveStatus(app.id, true)
   );
+
+  // Attempt to change active task to null as we are no longer focused on the window
   useOnMousedownOutside(app.windowRef, () =>
     setTaskActiveStatus(app.id, false)
   );

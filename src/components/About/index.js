@@ -5,7 +5,7 @@ export default createApplication(About, {
   title: 'About',
   iconLarge: require('./images/icon-lg.png'),
   iconSmall: require('./images/icon-sm.png'),
-  canMaximize: false,
+  canMaximize: true,
   x: 120,
   y: 120
 });

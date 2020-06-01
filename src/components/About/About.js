@@ -26,6 +26,7 @@ const Heading = styled.h1`
 
 const Subheading = styled.h1`
   font-size: 18px;
+  color: black;
 `;
 
 const Content = styled.div`
@@ -99,7 +100,7 @@ const About = () => {
         {/* <Picture alt="Cina Saffary" src={isHovering ? CINA_KID : CINA} /> */}
       </Container>
 
-      <TitleText as={Heading}>Dynamic Window Sizing Test</TitleText>
+      <Subheading as={Heading}>Dynamic Window Sizing Test</Subheading>
     </Window>
   );
 };

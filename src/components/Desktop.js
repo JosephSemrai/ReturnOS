@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { IconWithLabel, ApplicationIcon } from 'components/_ui/DesktopIcon';
 import Taskbar from 'components/_ui/Taskbar/Taskbar';
 import Minesweeper from 'components/Minesweeper';
+import ProcessExplorer from 'components/ProcessExplorer';
 import About from 'components/About';
 import useEventListener from 'lib/useEventListener';
 import useTaskManager from 'lib/useTaskManager';
@@ -18,12 +19,13 @@ const StyledDesktop = styled.div`
 const icons = (
   <>
     <ApplicationIcon application={Minesweeper} />
+    <ApplicationIcon application={ProcessExplorer} />
     <ApplicationIcon application={About} />
-    <IconWithLabel
+    {/* <IconWithLabel
       icon={require('components/About/images/github.png')}
       title="GitHub Repo"
       onOpen={() => window.open('https://github.com/1000hz/winmine-exe')}
-    />
+    /> */}
   </>
 );
 
