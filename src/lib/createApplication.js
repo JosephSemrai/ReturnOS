@@ -8,8 +8,8 @@ const DEFAULT_APPLICATION_PROPS = {
   canMaximize: true,
   canClose: true,
   singleton: false,
-  x: 100,
-  y: 100
+  x: 50,
+  y: 50
 };
 
 export const ApplicationContext = React.createContext(null);

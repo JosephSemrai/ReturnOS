@@ -2,7 +2,7 @@ export default {
   fontFamilies: {
     default: `"MS Sans Serif", Tahoma, sans-serif`
   },
-  fontSizes: ['11px'],
+  fontSizes: ['11px', '13px'],
   colors: {
     gray: ['#000', '#868a8e', '#c3c7cb', '#fff'],
     fuchsia: '#a958a8',

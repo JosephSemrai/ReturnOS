@@ -5,6 +5,7 @@ import Taskbar from 'components/_ui/Taskbar/Taskbar';
 import Minesweeper from 'components/Minesweeper';
 import ProcessExplorer from 'components/ProcessExplorer';
 import About from 'components/About';
+import InternetTraveler from 'components/InternetTraveler';
 import useEventListener from 'lib/useEventListener';
 import useTaskManager from 'lib/useTaskManager';
 import useWindowManager from 'lib/useWindowManager';
@@ -20,6 +21,7 @@ const icons = (
   <>
     <ApplicationIcon application={Minesweeper} />
     <ApplicationIcon application={ProcessExplorer} />
+    <ApplicationIcon application={InternetTraveler} />
     <ApplicationIcon application={About} />
     {/* <IconWithLabel
       icon={require('components/About/images/github.png')}

@@ -12,11 +12,6 @@ const Container = styled.div`
   display: flex;
 `;
 
-const Heading = styled.h1`
-  font-size: 24px;
-  margin-bottom: 32px;
-`;
-
 const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -103,7 +98,7 @@ const ProcessExplorer = () => {
       title="Process Explorer"
       resizable={true}
       icon={require('./images/icon.png')}
-      menuItems={['Help']}
+      menuItems={['File', 'Edit', 'View', 'Help']}
     >
       <Container>
         <Content>
