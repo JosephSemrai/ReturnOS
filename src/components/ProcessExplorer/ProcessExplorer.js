@@ -73,21 +73,26 @@ const ProcessExplorer = () => {
     return (
       <TableContainer>
         <Table>
-          <tr>
-            <TableHeading>Process Name</TableHeading>
-            <TableHeading>PID</TableHeading>
-            <TableHeading>Priority</TableHeading>
-          </tr>
-          {Object.keys(tasks).map((taskId) => (
-            <TableRow
-              isSelected={selectedTask === taskId} // Table row is selected if the row ID matches the selected ID
-              onClick={() => setSelectedTask(taskId)}
-            >
-              <TableData>{tasks[taskId].application.title}</TableData>
-              <TableData>{taskId}</TableData>
-              <TableData>Normal</TableData>
-            </TableRow>
-          ))}
+          <thead>
+            <tr>
+              <TableHeading>Process Name</TableHeading>
+              <TableHeading>PID</TableHeading>
+              <TableHeading>Priority</TableHeading>
+            </tr>
+          </thead>
+          <tbody>
+            {Object.keys(tasks).map((taskId) => (
+              <TableRow
+                isSelected={selectedTask === taskId} // Table row is selected if the row ID matches the selected ID
+                onClick={() => setSelectedTask(taskId)}
+                key={taskId}
+              >
+                <TableData>{tasks[taskId].application.title}</TableData>
+                <TableData>{taskId}</TableData>
+                <TableData>Normal</TableData>
+              </TableRow>
+            ))}
+          </tbody>
         </Table>
       </TableContainer>
     );

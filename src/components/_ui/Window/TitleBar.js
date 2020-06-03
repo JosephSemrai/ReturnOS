@@ -64,9 +64,12 @@ const MaximizeButton = styled(TitleBarButton)`
   background-image: url(${({ disabled }) =>
     require(`./images/maximize${disabled ? '-disabled' : ''}.png`)});
 `;
-const HelpButton = styled(TitleBarButton)`
-  background-image: url(${require('./images/help.png')});
-`;
+
+// TODO: Implement help button
+// const HelpButton = styled(TitleBarButton)`
+//   background-image: url(${require('./images/help.png')});
+// `;
+
 const CloseButton = styled(TitleBarButton)`
   background-image: url(${require('./images/close.png')});
   margin-left: 2px;

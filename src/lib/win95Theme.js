@@ -1,6 +1,6 @@
 export default {
   fontFamilies: {
-    default: `"MS Sans Serif", Tahoma, sans-serif`
+    default: `"Chicago", "MS Sans Serif", Tahoma, sans-serif`
   },
   fontSizes: ['11px', '13px'],
   colors: {

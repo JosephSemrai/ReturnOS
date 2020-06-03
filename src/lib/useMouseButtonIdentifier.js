@@ -6,14 +6,19 @@ function useMouseButtonIdentifier() {
     if (typeof document !== 'undefined') {
       const mousedown = (e) => {
         setButton(e.button);
-        let test =
-          e.button === 0
-            ? document.body.classList.add('isLeftClicking')
-            : e.button === 1
-            ? document.body.classList.add('isMiddleClicking')
-            : e.button === 2
+
+        // Shifted logic to add event listeners to determine what kind of click the user is performing
+        const checkRight = (e) =>
+          e.button === 2
             ? document.body.classList.add('isRightClicking')
             : null;
+        const checkOthers = (e) =>
+          e.button === 1
+            ? document.body.classList.add('isMiddleClicking')
+            : checkRight(e);
+        e.button === 0
+          ? document.body.classList.add('isLeftClicking')
+          : checkOthers(e);
       };
 
       const mouseup = (e) => {

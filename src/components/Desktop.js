@@ -2,13 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { IconWithLabel, ApplicationIcon } from 'components/_ui/DesktopIcon';
 import Taskbar from 'components/_ui/Taskbar/Taskbar';
+import useEventListener from 'lib/useEventListener';
+import useTaskManager from 'lib/useTaskManager';
+import useWindowManager from 'lib/useWindowManager';
+
+// Applications
 import Minesweeper from 'components/Minesweeper';
 import ProcessExplorer from 'components/ProcessExplorer';
 import About from 'components/About';
 import InternetTraveler from 'components/InternetTraveler';
-import useEventListener from 'lib/useEventListener';
-import useTaskManager from 'lib/useTaskManager';
-import useWindowManager from 'lib/useWindowManager';
+import Terminal from 'components/Terminal';
 
 const StyledDesktop = styled.div`
   display: grid;
@@ -22,6 +25,7 @@ const icons = (
     <ApplicationIcon application={Minesweeper} />
     <ApplicationIcon application={ProcessExplorer} />
     <ApplicationIcon application={InternetTraveler} />
+    <ApplicationIcon application={Terminal} />
     <ApplicationIcon application={About} />
     {/* <IconWithLabel
       icon={require('components/About/images/github.png')}

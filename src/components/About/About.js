@@ -4,15 +4,12 @@ import Window from 'components/_ui/Window/Window';
 import Text, { TitleText } from 'components/_ui/Text';
 import useHover from 'lib/useHover';
 
-const CINA = require('./images/cina.png');
-const CINA_KID = require('./images/cina-kid.png');
-
-const Picture = styled.img`
-  align-self: flex-start;
-  width: 300px;
-  height: 300px;
-  -webkit-touch-callout: none;
-`;
+// const Picture = styled.img`
+//   align-self: flex-start;
+//   width: 300px;
+//   height: 300px;
+//   -webkit-touch-callout: none;
+// `;
 
 const Container = styled.div`
   margin: 20px;
@@ -65,28 +62,20 @@ const SocialLink = ({ icon, alt, href, children }) => {
   );
 };
 
-const SocialLinksContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
-`;
-
 const About = () => {
-  const hoverRef = useRef();
-  const isHovering = useHover(hoverRef);
+  // const hoverRef = useRef();
+  // const isHovering = useHover(hoverRef);
 
   return (
     <Window
-      title="Test"
+      title="About"
       resizable={true}
       icon={require('./images/icon-sm.png')}
     >
       <Container>
         <Content>
-          <Text>
-            This is a test
-            {/* Built in an effort to return to{' '}
+          {/* Built in an effort to return to{' '}
             <Link ref={hoverRef}>simpler times</Link> by */}
-          </Text>
           <TitleText as={Heading}>ReturnOS</TitleText>
           {/* <SocialLinksContainer>
             <SocialLink
@@ -98,9 +87,8 @@ const About = () => {
           <TitleText as={Subheading}>@josephsemrai</TitleText> */}
         </Content>
         {/* <Picture alt="Cina Saffary" src={isHovering ? CINA_KID : CINA} /> */}
+        <Text style={{ color: 'black' }}>Version 0.0.1</Text>
       </Container>
-
-      <Subheading as={Heading}>Dynamic Window Sizing Test</Subheading>
     </Window>
   );
 };

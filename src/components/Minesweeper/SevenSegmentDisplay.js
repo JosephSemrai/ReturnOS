@@ -1,6 +1,6 @@
-import React from "react"
-import {times, flatten} from "lodash-es"
-import styled from "styled-components"
+import React from 'react';
+import { times, flatten } from 'lodash-es';
+import styled from 'styled-components';
 
 /*
   Segment values are represented as a 7-bit bitmap where the
@@ -36,36 +36,39 @@ const DISPLAY_SEGMENTS = {
   h: 0b1110100,
   i: 0b0110000,
   j: 0b0011111,
-  "-": 0b1000000
-}
+  '-': 0b1000000
+};
 
-const DIM_RED = "#a80b55"
+const DIM_RED = '#a80b55';
 
-function segmentPixels({index, height, width, active, theme}) {
+function segmentPixels({ index, height, width, active, theme }) {
   if (active && index === 6) {
-    width += 2
+    width += 2;
   }
 
-  const color = active ? theme.colors.red : DIM_RED
+  const color = active ? theme.colors.red : DIM_RED;
 
   const shouldDisplayPixel = (x, y) => {
     const isShortenedPortionOfMiddleSegment =
-      index === 6 && y < Math.trunc(height / 2) && (x <= 1 || x >= width - 2)
-    const isDitheredAway = (x * x + (index != 0 && index != 3)) % 2 === 0
+      index === 6 && y < Math.trunc(height / 2) && (x <= 1 || x >= width - 2);
+    const isDitheredAway = (x * x + (index !== 0 && index !== 3)) % 2 === 0;
 
-    return !isShortenedPortionOfMiddleSegment && (active || !isDitheredAway)
-  }
+    return !isShortenedPortionOfMiddleSegment && (active || !isDitheredAway);
+  };
 
-  const pixels = times(height, y =>
-    times(width - 2 * y, x => shouldDisplayPixel(x, y) && `${1 + x + y}px ${y}px ${color}`)
-  )
+  const pixels = times(height, (y) =>
+    times(
+      width - 2 * y,
+      (x) => shouldDisplayPixel(x, y) && `${1 + x + y}px ${y}px ${color}`
+    )
+  );
 
   return `box-shadow: ${flatten(pixels)
-    .filter(_ => _)
-    .join()}`
+    .filter((_) => _)
+    .join()}`;
 }
 
-function segmentPosition({index, height, width, active}) {
+function segmentPosition({ index, height, width, active }) {
   // prettier-ignore
   return (
     index === 1 ? `transform: translate3d(${width + 1}px, 0, 0) rotate(90deg)` :
@@ -77,7 +80,7 @@ function segmentPosition({index, height, width, active}) {
   )
 }
 
-const Segment = styled.div.attrs(props => ({
+const Segment = styled.div.attrs((props) => ({
   height: props.size,
   width: props.size * 3
 }))`
@@ -86,52 +89,57 @@ const Segment = styled.div.attrs(props => ({
   width: 1px;
   ${segmentPixels};
   ${segmentPosition};
-`
+`;
 
 const StyledDigit = styled.div`
-  height: ${props => props.size * 6 + 3}px;
-  width: ${props => props.size * 3 + 2}px;
+  height: ${(props) => props.size * 6 + 3}px;
+  width: ${(props) => props.size * 3 + 2}px;
   margin: 1px;
   position: relative;
-`
+`;
 
-const Digit = ({value, size}) => {
+const Digit = ({ value, size }) => {
   return (
     <StyledDigit size={size}>
-      {times(7, i => (
-        <Segment key={i} index={i} size={size} active={(DISPLAY_SEGMENTS[value] >> i) & 1} />
+      {times(7, (i) => (
+        <Segment
+          key={i}
+          index={i}
+          size={size}
+          active={(DISPLAY_SEGMENTS[value] >> i) & 1}
+        />
       ))}
     </StyledDigit>
-  )
-}
+  );
+};
 
 const StyledSevenSegmentDisplay = styled.div`
   display: inline-flex;
   margin: 1px;
-  background: ${props => props.theme.colors.gray[0]};
-  box-shadow: 1px 1px ${props => props.theme.colors.gray[3]},
-    -1px -1px ${props => props.theme.colors.gray[1]};
-`
+  background: ${(props) => props.theme.colors.gray[0]};
+  box-shadow: 1px 1px ${(props) => props.theme.colors.gray[3]},
+    -1px -1px ${(props) => props.theme.colors.gray[1]};
+`;
 
-const SevenSegmentDisplay = ({value, digits}) => {
-  const isNegative = value < 0
+const SevenSegmentDisplay = ({ value, digits }) => {
+  const isNegative = value < 0;
   const displayValues = Math.abs(value)
     .toString()
-    .padStart(digits, "0")
-    .split("")
-    .slice(-digits)
+    .padStart(digits, '0')
+    .split('')
+    .slice(-digits);
 
   return (
     <StyledSevenSegmentDisplay>
       {displayValues.map((digit, i) => (
-        <Digit key={i} value={isNegative && i === 0 ? "-" : digit} size={3} />
+        <Digit key={i} value={isNegative && i === 0 ? '-' : digit} size={3} />
       ))}
     </StyledSevenSegmentDisplay>
-  )
-}
+  );
+};
 
 SevenSegmentDisplay.defaultProps = {
   digits: 3
-}
+};
 
-export default SevenSegmentDisplay
+export default SevenSegmentDisplay;

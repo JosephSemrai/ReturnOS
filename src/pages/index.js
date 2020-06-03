@@ -7,13 +7,14 @@ import TaskManager from 'components/TaskManager';
 import useMouseButtonIdentifier from 'lib/useMouseButtonIdentifier';
 import usePreventImageDrag from 'lib/usePreventImageDrag';
 import oceanBackground from 'static/images/retroOcean.jpg';
+import bg1 from 'static/images/bg7.png';
 import useHandleZoomLevel from 'lib/useHandleZoomLevel';
 
 const Windows95 = styled.div`
   position: fixed;
   height: 100vh;
   width: 100vw;
-  background-image: url(${oceanBackground});
+  background-image: url(${bg1});
   /* background: ${win95Theme.colors.teal}; */
   color: ${win95Theme.colors.gray[3]};
   overflow: hidden;
