@@ -30,7 +30,7 @@ function useMinimize(titleBarTransitionRef) {
         once: true
       });
     }
-  }, [isTransitioning]);
+  }, [isTransitioning, titleBarTransitionRef]);
 
   return { isTransitioning, isMinimized, toggleMinimize };
 }
@@ -53,33 +53,42 @@ const Window = ({
   );
   const [position, setPosition] = useState({ x: app.x, y: app.y });
 
-  // Checks if the position of the Window combined with the bounds of the Window lead to the Window's content being displayed off screen
-  // If this is true, we will adjust the Window to display fully within the bounds of the screen, else we will return the values unaltered
-  // TODO: Move this logic into the bounds detection when moving the window so the user is unable to move the Window off of the screen
-  const windowBoundsAdjuster = () => {
-    if (!bounds || !position) return;
-
-    let desktopHeight = window.innerHeight - 28;
-    let desktopWidth = window.innerWidth;
-
-    // Re-calculate new position including the delta as the changes may not have been processed yet
-    if (position.y + bounds.height > desktopHeight)
-      alert(
-        'Bounds height:' + bounds.height + ' | ' + 'Position: ' + position.y
-      );
-  };
-
   // Run the bounds adjuster every single time the position is updated
   useEffect(() => {
-    windowBoundsAdjuster();
-  }, [position]);
+    // Checks if the position of the Window combined with the bounds of the Window lead to the Window's content being displayed off screen
+    // If this is true, we will adjust the Window to display fully within the bounds of the screen, else we will return the values unaltered
+    // TODO: Move this logic into the bounds detection when moving the window so the user is unable to move the Window off of the screen
+    const windowBoundsAdjuster = () => {
+      if (!bounds || !position) return;
 
-  useEffect(() => setTaskActiveStatus(app.id, !isMinimized), [isMinimized]);
+      let desktopHeight = window.innerHeight - 28;
+      let desktopWidth = window.innerWidth;
+
+      // Re-calculate new position including the delta as the changes may not have been processed yet
+      // Bottom out of bounds
+      if (position.y + bounds.height > desktopHeight)
+        alert(`Bounds height: ${bounds.height} | Position:  ${position.y}`);
+      // Right out of bounds
+      if (position.x + bounds.width > desktopWidth)
+        alert(`Bounds height: ${bounds.height} | Position:  ${position.y}`);
+    };
+    windowBoundsAdjuster();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [position, bounds?.height, bounds?.width]);
+
+  useEffect(
+    () => setTaskActiveStatus(app.id, !isMinimized),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isMinimized, app.id] // app.id added to dependency list, setTaskActiveStatus excluded, possible stale closure
+  );
+
   useEffect(() => {
     if (isMinimized && activeTask === app.id) {
       toggleMinimize();
     }
-  }, [activeTask]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTask, app.id]); // app.id added to dependency list, toggleMinimize excluded, possible stale closure
 
   const { isDragging, delta } = useDraggable(titleBarRef, {
     onDragStart() {

@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import Frame from 'react-frame-component';
 
 import { DosFactory } from 'js-dos';
 require('js-dos');

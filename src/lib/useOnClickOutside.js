@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import useEventListener from 'lib/useEventListener';
 
 export function useOnMouseEventOutside(el, event, callback, options) {
   useEffect(() => {
     if ('current' in el) {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       el = el.current;
     }
   });

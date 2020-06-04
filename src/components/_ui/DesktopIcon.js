@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Text from 'components/_ui/Text';
 import ditherBackground from 'lib/ditherBackground';
@@ -73,6 +73,8 @@ export const IconWithLabel = ({ icon, title, onOpen }) => {
 };
 
 export const ApplicationIcon = ({ application, runtimeProps }) => {
+  // Desktop does not provide runtime props
+
   const { createTask } = useTaskManager();
 
   return (

@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
-import styled, { ThemeProvider, keyframes } from 'styled-components';
+import React from 'react';
+import styled, { ThemeProvider } from 'styled-components';
 import win95Theme from 'lib/win95Theme';
 import cursorLoadAnimation from 'lib/cursorLoadAnimation';
 import Desktop from 'components/Desktop';
 import TaskManager from 'components/TaskManager';
 import useMouseButtonIdentifier from 'lib/useMouseButtonIdentifier';
 import usePreventImageDrag from 'lib/usePreventImageDrag';
-import oceanBackground from 'static/images/retroOcean.jpg';
+// import oceanBackground from 'static/images/retroOcean.jpg';
 import bg1 from 'static/images/bg7.png';
 import useHandleZoomLevel from 'lib/useHandleZoomLevel';
 

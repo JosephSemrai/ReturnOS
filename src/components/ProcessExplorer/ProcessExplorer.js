@@ -1,8 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Window from 'components/_ui/Window/Window';
-import Text, { TitleText } from 'components/_ui/Text';
-import useHover from 'lib/useHover';
 import useTaskManager from 'lib/useTaskManager';
 import { boxShadow, recessedBoxShadow } from 'components/_ui/Shadow';
 import Button from 'components/_ui/Button';
@@ -63,10 +61,10 @@ const TableRow = styled.tr`
 `;
 
 const ProcessExplorer = () => {
-  const hoverRef = useRef();
-  const isHovering = useHover(hoverRef);
+  // const hoverRef = useRef();
+  // const isHovering = useHover(hoverRef);
 
-  const { tasks, activeTask, createTask, endTask } = useTaskManager();
+  const { tasks, activeTask, endTask } = useTaskManager();
   const [selectedTask, setSelectedTask] = useState();
 
   const ProcessTable = (tasks) => {

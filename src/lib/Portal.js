@@ -1,20 +1,18 @@
-import {useRef, useEffect} from "react"
-import {createPortal} from "react-dom"
+import { useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
-const Portal = ({parent = document.body, children}) => {
-  const node = useRef(document.createElement("div"))
+const Portal = ({ parent = document.body, children }) => {
+  const node = useRef(document.createElement('div'));
 
-  useEffect(
-    () => {
-      parent && parent.appendChild(node.current)
-      return () => {
-        parent && parent.removeChild(node.current)
-      }
-    },
-    [parent]
-  )
+  useEffect(() => {
+    parent && parent.appendChild(node.current);
+    return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      parent && parent.removeChild(node.current);
+    };
+  }, [parent]);
 
-  return createPortal(children, node.current)
-}
+  return createPortal(children, node.current);
+};
 
-export default Portal
+export default Portal;

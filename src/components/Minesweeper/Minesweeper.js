@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo } from 'react';
 import styled from 'styled-components';
 import Window from 'components/_ui/Window/Window';
 import Board from './Board';
@@ -45,7 +45,7 @@ const Settings = {
 };
 
 const Minesweeper = () => {
-  const [settings, setSettings] = useState(Settings.EASY);
+  const [settings] = useState(Settings.EASY);
   const { state, handlers } = useMinesweeper(settings);
   const { squares, revealed, exploded, won, flags, questions, time } = state;
   const flagCount = useMemo(() => flags.filter((_) => _).length, [flags]);

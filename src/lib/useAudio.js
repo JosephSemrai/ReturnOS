@@ -56,6 +56,7 @@ if (typeof Audio === 'undefined') {
     'mediaKeys',
     'setMediaKeys'
     // TODO: Address comma
+    // eslint-disable-next-line no-sequences
   ].reduce((obj, prop) => ((obj[prop] = noop), obj), {});
 }
 

@@ -27,11 +27,11 @@ const icons = (
     <ApplicationIcon application={InternetTraveler} />
     <ApplicationIcon application={Terminal} />
     <ApplicationIcon application={About} />
-    {/* <IconWithLabel
+    <IconWithLabel
       icon={require('components/About/images/github.png')}
       title="GitHub Repo"
-      onOpen={() => window.open('https://github.com/1000hz/winmine-exe')}
-    /> */}
+      onOpen={() => window.open('https://github.com/josephsemrai/ReturnOS')}
+    />
   </>
 );
 

@@ -1,6 +1,5 @@
-import React from 'react';
 import styled from 'styled-components';
-import { boxShadow, recessedBoxShadow } from 'components/_ui/Shadow';
+import { recessedBoxShadow } from 'components/_ui/Shadow';
 
 const InputBox = styled.input`
   background: white;

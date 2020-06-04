@@ -15,6 +15,7 @@ function useWindowManager(tasks, activeTask) {
 
   const windows = windowOrder.map((taskId) => {
     const task = tasks[taskId];
+    // eslint-disable-next-line array-callback-return
     if (!task || !task.application || !task.application.AppComponent) return;
     const { AppComponent } = task.application;
     return <AppComponent key={task.id} {...task} />;

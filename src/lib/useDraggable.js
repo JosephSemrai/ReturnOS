@@ -1,4 +1,4 @@
-import { useReducer, useEffect, useLayoutEffect, useRef } from 'react';
+import { useReducer } from 'react';
 import useEventListener from 'lib/useEventListener';
 
 const noop = () => {};
@@ -40,6 +40,10 @@ function useDraggable(
         };
       }
       case 'DRAG_END': {
+        return defaultState;
+      }
+      default: {
+        alert('DRAGGING MANAGER: Something went wrong.');
         return defaultState;
       }
     }

@@ -1,8 +1,7 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Window from 'components/_ui/Window/Window';
 import Text, { TitleText } from 'components/_ui/Text';
-import useHover from 'lib/useHover';
 
 // const Picture = styled.img`
 //   align-self: flex-start;
@@ -21,11 +20,6 @@ const Heading = styled.h1`
   margin-bottom: 32px;
 `;
 
-const Subheading = styled.h1`
-  font-size: 18px;
-  color: black;
-`;
-
 const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -38,29 +32,6 @@ const Content = styled.div`
   box-shadow: inset -1px 0 ${(props) => props.theme.colors.gray[3]},
     inset -2px 0 ${(props) => props.theme.colors.gray[1]};
 `;
-
-const Link = styled.a`
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  color: ${(props) => props.theme.colors.blue};
-  text-decoration: underline;
-  cursor: ${(props) => props.theme.cursors.pointer};
-  cursor: ${(props) => props.theme.cursors.webkitPointer};
-`;
-
-const Logo = styled.img`
-  width: 32px;
-`;
-
-const SocialLink = ({ icon, alt, href, children }) => {
-  return (
-    <Link href={href} target="_blank">
-      <Logo alt={alt} src={icon} />
-      <Text>{children}</Text>
-    </Link>
-  );
-};
 
 const About = () => {
   // const hoverRef = useRef();
