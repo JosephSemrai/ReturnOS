@@ -75,13 +75,13 @@ export const IconWithLabel = ({ icon, title, onOpen }) => {
 export const ApplicationIcon = ({ application, runtimeProps }) => {
   // Desktop does not provide runtime props
 
-  const { createTask } = useTaskManager();
+  const { createTask } = useTaskManager(); // Contains application state and must be updated
 
   return (
     <IconWithLabel
       icon={application.iconLarge}
       title={application.title}
-      onOpen={() => createTask({ application, ...runtimeProps })}
+      onOpen={() => createTask({ application })} // runtimeProps can be added as a spread operator here, but is not required
     />
   );
 };

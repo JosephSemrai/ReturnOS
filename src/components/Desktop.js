@@ -6,14 +6,13 @@ import useEventListener from 'lib/useEventListener';
 import useTaskManager from 'lib/useTaskManager';
 import useWindowManager from 'lib/useWindowManager';
 import useAlert from 'lib/useAlert';
-
+import DaemonLayer from './DaemonLayer';
 // Applications
 import Minesweeper from 'components/Minesweeper';
 import ProcessExplorer from 'components/ProcessExplorer';
 import About from 'components/About';
 import InternetTraveler from 'components/InternetTraveler';
 import Terminal from 'components/Terminal';
-import Alert from 'components/Alert';
 
 const StyledDesktop = styled.div`
   display: grid;
@@ -25,13 +24,14 @@ const StyledDesktop = styled.div`
 const Desktop = () => {
   const { tasks, activeTask } = useTaskManager();
   const windows = useWindowManager(tasks, activeTask);
+  // useHandleZoomLevel(); // Must be placed at this level
+  const windowsAlert = useAlert();
 
   useEventListener(global.document, 'contextmenu', (e) => e.preventDefault());
 
-  const windowsAlert = useAlert();
-
   const icons = (
     <>
+      <DaemonLayer />
       <ApplicationIcon application={Minesweeper} />
       <ApplicationIcon application={ProcessExplorer} />
       <ApplicationIcon application={InternetTraveler} />
@@ -53,6 +53,7 @@ const Desktop = () => {
   return (
     <>
       <StyledDesktop>
+        <DaemonLayer />
         {icons}
         {windows}
       </StyledDesktop>

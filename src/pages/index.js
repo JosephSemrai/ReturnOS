@@ -8,7 +8,6 @@ import useMouseButtonIdentifier from 'lib/useMouseButtonIdentifier';
 import usePreventImageDrag from 'lib/usePreventImageDrag';
 // import oceanBackground from 'static/images/retroOcean.jpg';
 import bg1 from 'static/images/bg7.png';
-import useHandleZoomLevel from 'lib/useHandleZoomLevel';
 
 const Windows95 = styled.div`
   position: fixed;
@@ -42,7 +41,6 @@ const Windows95 = styled.div`
 const Index = () => {
   useMouseButtonIdentifier();
   usePreventImageDrag();
-  useHandleZoomLevel();
 
   return (
     <Windows95>

@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Window from 'components/_ui/Window/Window';
 import Text, { TitleText } from 'components/_ui/Text';
+import Button from 'components/_ui/Button';
+import useAlert from 'lib/useAlert';
 
 // const Picture = styled.img`
 //   align-self: flex-start;
@@ -36,6 +38,7 @@ const Content = styled.div`
 const About = () => {
   // const hoverRef = useRef();
   // const isHovering = useHover(hoverRef);
+  const windowsAlert = useAlert();
 
   return (
     <Window
@@ -58,6 +61,7 @@ const About = () => {
           <TitleText as={Subheading}>@josephsemrai</TitleText> */}
         </Content>
         {/* <Picture alt="Cina Saffary" src={isHovering ? CINA_KID : CINA} /> */}
+        <Button onClick={() => windowsAlert('Test')}>Test Alert</Button>
         <Text style={{ color: 'black' }}>Version 0.0.1</Text>
       </Container>
     </Window>

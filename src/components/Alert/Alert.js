@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Window from 'components/_ui/Window/Window';
+import useAudio from 'lib/useAudio';
 import Text, { TitleText } from 'components/_ui/Text';
 
 // const Picture = styled.img`
@@ -34,6 +35,12 @@ const Content = styled.div`
 `;
 
 const Alert = (props) => {
+  const alertSound = useAudio(require('../../static/sounds/alert.wav'));
+
+  useEffect(() => {
+    alertSound.play();
+  }, [alertSound]);
+
   return (
     <Window
       title="Alert"

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { TitleText } from 'components/_ui/Text';
 import TaskbarButton, { taskActiveBoxShadow } from './TaskbarButton';
@@ -29,11 +29,16 @@ const StyledStartButton = styled(TaskbarButton)`
 `;
 
 const StartButton = () => {
-  const startupSound = useAudio('/static/sounds/startup.mp3');
+  const startupSound = useAudio(require('../../../static/sounds/ustartup.wav'));
   const onClick = useCallback(
     () => (startupSound.paused ? startupSound.play() : startupSound.load()),
     [startupSound]
   );
+
+  // When the StartButton loads in, play the startup sound
+  useEffect(() => {
+    startupSound.play();
+  }, [startupSound]);
 
   return (
     <StyledStartButton onClick={onClick}>
