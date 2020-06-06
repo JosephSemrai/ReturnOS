@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import StartButton from './StartButton';
 import SystemTray from './SystemTray';
 import Task from './Task';
+import { taskbarHeight } from 'lib/constants';
 
 const StyledTaskbar = styled.div`
   position: fixed;
@@ -10,7 +11,7 @@ const StyledTaskbar = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  height: 28px;
+  height: ${taskbarHeight};
   padding-top: 2px;
   display: flex;
   background: ${(props) => props.theme.colors.gray[2]};

@@ -1,6 +1,7 @@
 import Alert from 'components/Alert/Alert';
 import createApplication from 'lib/createApplication';
 import useTaskManager from 'lib/useTaskManager';
+import { desktopHeight, desktopWidth } from './constants';
 
 function useAlert() {
   const { createTask } = useTaskManager();
@@ -16,8 +17,8 @@ function useAlert() {
       iconLarge: require('../components/Alert/images/icon-lg.png'),
       iconSmall: require('../components/Alert/images/icon-sm.png'),
       canMaximize: true,
-      x: 120,
-      y: 120,
+      x: desktopWidth / 2 - 100,
+      y: desktopHeight / 2 - 100,
       alertMessage
     });
 
