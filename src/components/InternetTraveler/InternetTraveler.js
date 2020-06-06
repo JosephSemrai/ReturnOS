@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Window from 'components/_ui/Window/Window';
 
@@ -15,7 +15,6 @@ const Content = styled.div`
   flex-direction: column;
   justify-content: center;
   text-align: left;
-  width: 220px;
   color: ${(props) => props.theme.colors.gray[0]};
 `;
 
@@ -25,14 +24,33 @@ const ActionBar = styled.div`
   height: 20px;
 `;
 
-const PageView = styled.div`
+const PageView = styled.iframe`
   height: 60vh;
   width: 80vw;
 `;
 
-const handleNavigate = () => {};
+const formatURL = (url) => {
+  if (!/^(https?:)?\/\//i.test(url)) {
+    url = 'http://' + url;
+  }
+
+  return url;
+};
 
 const InternetTraveler = () => {
+  const proxyURL = 'https://us15.proxysite.com/process.php?d=';
+  const homeURL = 'https://google.com';
+
+  const [inputURL, setInputURL] = useState();
+  const [statefulURL, setStatefulURL] = useState(proxyURL + homeURL);
+
+  const handleAddressChange = (e) => setInputURL(e.target.value);
+
+  // Called when "Go" button is pressed, setting the iframe URL with the proxy URL + the input URL
+  const handleUpdateStatefulURL = () => {
+    setStatefulURL(proxyURL + inputURL);
+  };
+
   return (
     <Window
       title="Internet Traveler"
@@ -43,16 +61,21 @@ const InternetTraveler = () => {
       <Container>
         <Content>
           <ActionBar>
-            <InputBox style={{ height: '100%', flex: 2 }} fontSize="16px" />{' '}
+            <InputBox
+              style={{ height: '100%', flex: 2 }}
+              value={inputURL}
+              onChange={handleAddressChange}
+              fontSize="16px"
+            />{' '}
             <Button
-              onClick={handleNavigate}
+              onClick={handleUpdateStatefulURL}
               style={{ height: '100%', flex: 1, marginLeft: 5 }}
             >
               Go
             </Button>
           </ActionBar>
 
-          <PageView />
+          <PageView src={statefulURL} />
         </Content>
       </Container>
     </Window>

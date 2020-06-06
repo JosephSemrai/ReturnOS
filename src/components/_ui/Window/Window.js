@@ -11,7 +11,7 @@ import useDraggable from 'lib/useDraggable';
 import useBoundingRect from 'lib/useBoundingRect';
 import useEventListener from 'lib/useEventListener';
 import { useOnMousedownOutside } from 'lib/useOnClickOutside';
-import { desktopHeight, desktopWidth } from 'lib/constants';
+import { taskbarHeight } from 'lib/constants';
 
 function useMinimize(titleBarTransitionRef) {
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -61,6 +61,9 @@ const Window = ({
     // TODO: Move this logic into the bounds detection when moving the window so the user is unable to move the Window off of the screen
     const windowBoundsAdjuster = () => {
       if (!bounds || !position) return;
+
+      let desktopHeight = window.innerHeight - taskbarHeight;
+      let desktopWidth = window.innerWidth;
 
       // Re-calculate new position including the delta as the changes may not have been processed yet
       // Bottom out of bounds

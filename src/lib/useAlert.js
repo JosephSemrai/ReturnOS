@@ -1,7 +1,7 @@
 import Alert from 'components/Alert/Alert';
 import createApplication from 'lib/createApplication';
 import useTaskManager from 'lib/useTaskManager';
-import { desktopHeight, desktopWidth } from './constants';
+import { taskbarHeight } from './constants';
 
 function useAlert() {
   const { createTask } = useTaskManager();
@@ -11,6 +11,9 @@ function useAlert() {
 
   // Dependent on the current create task context (createApplication must be updated)
   return (alertMessage) => {
+    const desktopHeight = window.innerHeight - taskbarHeight;
+    const desktopWidth = window.innerWidth;
+
     // Creates application with extra application metadata (the error message in alertMessage which can be accessed via props.application.alertMessage in the Alert component)
     const alertApp = createApplication(Alert, {
       title: 'Alert',
