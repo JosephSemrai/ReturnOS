@@ -13,6 +13,7 @@ import ProcessExplorer from 'components/ProcessExplorer';
 import About from 'components/About';
 import InternetTraveler from 'components/InternetTraveler';
 import Terminal from 'components/Terminal';
+import Code from './Code';
 
 const StyledDesktop = styled.div`
   display: grid;
@@ -36,6 +37,7 @@ const Desktop = () => {
       <ApplicationIcon application={ProcessExplorer} />
       <ApplicationIcon application={InternetTraveler} />
       <ApplicationIcon application={Terminal} />
+      <ApplicationIcon application={Code} />
       <ApplicationIcon application={About} />
       <IconWithLabel
         icon={require('components/About/images/github.png')}
