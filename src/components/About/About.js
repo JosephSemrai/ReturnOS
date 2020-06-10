@@ -63,6 +63,7 @@ const About = () => {
         {/* <Picture alt="Cina Saffary" src={isHovering ? CINA_KID : CINA} /> */}
         <Button onClick={() => windowsAlert('Test')}>Test Alert</Button>
         <Text style={{ color: 'black' }}>Version 0.0.1</Text>
+        <Text style={{ color: 'black' }}>Running Windowing System v2</Text>
       </Container>
     </Window>
   );
