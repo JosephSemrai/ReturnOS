@@ -167,8 +167,9 @@ const Window = ({
                 ))}
               </MenuBar>
             ) : undefined}
-
-            {children}
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+              {children}
+            </div>
           </WindowFrame>
 
           {/* {isDragging && (

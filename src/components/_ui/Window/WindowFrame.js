@@ -15,6 +15,8 @@ export const WindowFrame = styled.div.attrs(({ x, y }) => ({
     inset 2px 2px 0 ${(props) => props.theme.colors.gray[3]};
   outline: 0;
   height: 100%;
+  display: flex;
+  flex-direction: column;
   cursor: ${win95Theme.cursors.default};
   cursor: ${win95Theme.cursors.webkitDefault};
 `;
