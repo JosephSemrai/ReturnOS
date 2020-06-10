@@ -5,6 +5,7 @@ import useAudio from 'lib/useAudio';
 import Text, { TitleText } from 'components/_ui/Text';
 import alertImage from './images/icon-lg.png';
 import Button from 'components/_ui/Button';
+import { ResizableBox } from 'react-resizable';
 
 // const Picture = styled.img`
 //   align-self: flex-start;
@@ -50,6 +51,18 @@ const Alert = (props) => {
             : 'Alert. Something happened.'}
           <Button>Ok.</Button>
         </Content>
+
+        <div>
+          <ResizableBox
+            className="custom-box box"
+            width={200}
+            height={200}
+            handleSize={[10, 10]}
+            resizeHandles={['se', 'sw', 'ne', 'nw']}
+          >
+            <span className="text">Test</span>
+          </ResizableBox>
+        </div>
       </Container>
     </Window>
   );

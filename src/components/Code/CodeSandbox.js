@@ -38,7 +38,7 @@ const formatURL = (url) => {
 };
 
 const CodeSandbox = () => {
-  const viewerURL = 'https://codesandbox.io/s/react-new';
+  const viewerURL = 'https://codesandbox.io/s/github/josephsemrai/returnos';
 
   return (
     <Window

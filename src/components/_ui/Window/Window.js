@@ -12,6 +12,8 @@ import useBoundingRect from 'lib/useBoundingRect';
 import useEventListener from 'lib/useEventListener';
 import { useOnMousedownOutside } from 'lib/useOnClickOutside';
 import { taskbarHeight } from 'lib/constants';
+import { ResizableBox, Resizable } from 'react-resizable';
+import { Rnd } from 'react-rnd';
 
 function useMinimize(titleBarTransitionRef) {
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -53,6 +55,9 @@ const Window = ({
     titleBarTransitionRef
   );
   const [position, setPosition] = useState({ x: app.x, y: app.y });
+  const [isDragging, setIsDragging] = useState(false);
+  const [delta, setDelta] = useState();
+  const dragContainerRef = useRef();
 
   // Run the bounds adjuster every single time the position is updated
   useEffect(() => {
@@ -91,81 +96,104 @@ const Window = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTask, app.id]); // app.id added to dependency list, toggleMinimize excluded, possible stale closure
 
-  const { isDragging, delta } = useDraggable(titleBarRef, {
-    onDragStart() {
-      setTaskActiveStatus(app.id, true);
-    },
-    onDragEnd({ delta }) {
-      console.log(`X Delta ${delta.x}`);
-      console.log(`Y Delta ${delta.y}`);
-      console.log('height' + window.screen.height);
-
-      console.log(JSON.stringify(bounds));
-      setPosition((position) => ({
-        x: position.x + delta.x,
-        y: position.y + delta.y
-      }));
-    }
-  });
+  // const { isDragging, delta } = useDraggable(titleBarRef, {
+  //   onDragStart() {},
+  //   onDragEnd({ delta }) {}
+  // });
 
   // Change active task to the window on mousedown of the window
-  useEventListener(app.windowRef, 'mousedown', () =>
+  useEventListener(dragContainerRef, 'mousedown', () =>
     setTaskActiveStatus(app.id, true)
   );
 
   // Attempt to change active task to null as we are no longer focused on the window
-  useOnMousedownOutside(app.windowRef, () =>
+  useOnMousedownOutside(dragContainerRef, () =>
     setTaskActiveStatus(app.id, false)
   );
 
   return (
-    <app.ApplicationContext.Provider value={{ ...app, toggleMinimize }}>
-      <WindowFrame
-        ref={app.windowRef}
-        x={position.x}
-        y={position.y}
-        resizable={resizable}
-        tabIndex="0"
-        isMinimized={isMinimized}
+    <div ref={dragContainerRef}>
+      <Rnd
+        style={{ cursor: '' }}
+        default={{
+          x: app.x,
+          y: app.y
+        }}
+        position={{ x: position.x, y: position.y }}
+        onDragStart={() => {
+          setTaskActiveStatus(app.id, true);
+          setIsDragging(true);
+        }}
+        onResizeStart={() => setTaskActiveStatus(app.id, true)}
+        onResizeStop={(_, __, ___, ____, position) => {
+          setPosition({
+            x: position.x,
+            y: position.y
+          });
+        }}
+        onDragStop={(mouseEvent, draggableData) => {
+          setDelta({ x: draggableData.deltaX, y: draggableData.deltaY });
+          setPosition({
+            x: draggableData.x,
+            y: draggableData.y
+          });
+          setIsDragging(false);
+        }}
+        dragHandleClassName="titleBar"
       >
-        <TitleBar
-          ref={titleBarRef}
-          active={app.id === activeTask}
-          title={title + '| ' + position.x + ', ' + position.y}
-          buttons={titlebarButtons}
-          icon={icon}
-          onMinimize={toggleMinimize}
-        />
-        {menuItems ? (
-          <MenuBar>
-            {menuItems.map((menuItem, i) => (
-              <MenuBarItem key={i}>{menuItem}</MenuBarItem>
-            ))}
-          </MenuBar>
-        ) : undefined}
-        {children}
-      </WindowFrame>
-      {isDragging && (
-        <Portal parent={app.windowRef.current.parentElement}>
-          <WindowDragOutline
-            resizableWindow={resizable}
-            bounds={bounds}
-            delta={delta}
-          />
-        </Portal>
-      )}
-      {isTransitioning && (
-        <Portal parent={app.windowRef.current.parentElement}>
-          <TitleBarTransition
-            ref={titleBarTransitionRef}
-            title={title}
-            icon={icon}
-            srcRef={isMinimized ? app.taskbarRef : titleBarRef}
-            destRef={isMinimized ? titleBarRef : app.taskbarRef}
-          />
-        </Portal>
-      )}
-    </app.ApplicationContext.Provider>
+        <app.ApplicationContext.Provider value={{ ...app, toggleMinimize }}>
+          <WindowFrame
+            ref={app.windowRef}
+            tabIndex="0"
+            isMinimized={isMinimized}
+          >
+            {/* <Resizable
+          handleSize={[100, 100]}
+          resizeHandles={['ne', 'nw', 'sw', 'se']}
+        > */}
+            <TitleBar
+              className="titleBar"
+              ref={titleBarRef}
+              active={app.id === activeTask}
+              title={title + '| ' + position.x + ', ' + position.y}
+              buttons={titlebarButtons}
+              icon={icon}
+              onMinimize={toggleMinimize}
+            />
+            {menuItems ? (
+              <MenuBar>
+                {menuItems.map((menuItem, i) => (
+                  <MenuBarItem key={i}>{menuItem}</MenuBarItem>
+                ))}
+              </MenuBar>
+            ) : undefined}
+
+            {children}
+          </WindowFrame>
+
+          {/* {isDragging && (
+          <Portal parent={app.windowRef.current.parentElement}>
+            <WindowDragOutline
+              resizableWindow={resizable}
+              bounds={bounds}
+              delta={delta}
+            />
+          </Portal>
+        )} */}
+          {isTransitioning && (
+            <Portal parent={app.windowRef.current.parentElement}>
+              <TitleBarTransition
+                ref={titleBarTransitionRef}
+                title={title}
+                icon={icon}
+                srcRef={isMinimized ? app.taskbarRef : titleBarRef}
+                destRef={isMinimized ? titleBarRef : app.taskbarRef}
+              />
+            </Portal>
+          )}
+        </app.ApplicationContext.Provider>
+      </Rnd>
+    </div>
   );
 };
 
