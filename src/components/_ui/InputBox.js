@@ -17,12 +17,6 @@ const InputBox = styled.input`
     -webkit-box-shadow: none;
     box-shadow: none;
   }
-  ::selection {
-    color: none;
-    background: none;
-    border: none;
-    outline: none;
-  }
 `;
 
 export default InputBox;

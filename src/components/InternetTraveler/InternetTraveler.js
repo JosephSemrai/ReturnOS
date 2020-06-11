@@ -36,11 +36,11 @@ const formatURL = (url) => {
 };
 
 const InternetTraveler = () => {
-  const proxyURL = 'https://us15.proxysite.com/process.php?d=';
-  const homeURL = 'https://google.com';
+  const homeURL = 'https://us15.proxysite.com';
+  const proxyURL = 'https://stream.myedapp.com/?fwd=';
 
   const [inputURL, setInputURL] = useState();
-  const [statefulURL, setStatefulURL] = useState(proxyURL + homeURL);
+  const [statefulURL, setStatefulURL] = useState(homeURL);
 
   const handleAddressChange = (e) => setInputURL(e.target.value);
 

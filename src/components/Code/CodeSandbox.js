@@ -5,28 +5,20 @@ import Window from 'components/_ui/Window/Window';
 import Button from 'components/_ui/Button';
 import InputBox from 'components/_ui/InputBox';
 
-const Container = styled.div`
-  margin: 5px;
-  display: flex;
-`;
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: left;
-  color: ${(props) => props.theme.colors.gray[0]};
-`;
-
-const ActionBar = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 20px;
+const PageViewContainer = styled.div`
+  width: 100%;
+  flex: 1;
 `;
 
 const PageView = styled.iframe`
-  height: 60vh;
-  width: 80vw;
+  height: 100%;
+  width: 100%;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 `;
 
 const formatURL = (url) => {
@@ -47,8 +39,7 @@ const CodeSandbox = () => {
       icon={require('./images/icon.png')}
     >
       <Container>
-        <Content>
-          {/* <ActionBar>
+        {/* <ActionBar>
             <InputBox
               style={{ height: '100%', flex: 2 }}
               value={inputURL}
@@ -63,8 +54,9 @@ const CodeSandbox = () => {
             </Button>
           </ActionBar> */}
 
+        <PageViewContainer>
           <PageView src={viewerURL} />
-        </Content>
+        </PageViewContainer>
       </Container>
     </Window>
   );
