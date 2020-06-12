@@ -48,8 +48,9 @@ const Window = ({
 }) => {
   const { activeTask, setTaskActiveStatus } = useTaskManager();
   const app = useApplicationContext();
-  const bounds = useBoundingRect(app.windowRef);
+  // const bounds = useBoundingRect(app.windowRef);
   const titleBarRef = useRef();
+  const activeWindowRef = useRef();
   const titleBarTransitionRef = useRef();
   const { isTransitioning, isMinimized, toggleMinimize } = useMinimize(
     titleBarTransitionRef
@@ -60,27 +61,27 @@ const Window = ({
   const dragContainerRef = useRef();
 
   // Run the bounds adjuster every single time the position is updated
-  useEffect(() => {
-    // Checks if the position of the Window combined with the bounds of the Window lead to the Window's content being displayed off screen
-    // If this is true, we will adjust the Window to display fully within the bounds of the screen, else we will return the values unaltered
-    // TODO: Move this logic into the bounds detection when moving the window so the user is unable to move the Window off of the screen
-    const windowBoundsAdjuster = () => {
-      if (!bounds || !position) return;
+  // useEffect(() => {
+  //   // Checks if the position of the Window combined with the bounds of the Window lead to the Window's content being displayed off screen
+  //   // If this is true, we will adjust the Window to display fully within the bounds of the screen, else we will return the values unaltered
+  //   // TODO: Move this logic into the bounds detection when moving the window so the user is unable to move the Window off of the screen
+  //   const windowBoundsAdjuster = () => {
+  //     if (!bounds || !position) return;
 
-      let desktopHeight = window.innerHeight - taskbarHeight;
-      let desktopWidth = window.innerWidth;
+  //     let desktopHeight = window.innerHeight - taskbarHeight;
+  //     let desktopWidth = window.innerWidth;
 
-      // Re-calculate new position including the delta as the changes may not have been processed yet
-      // Bottom out of bounds
-      if (position.y + bounds.height > desktopHeight)
-        alert(`Bounds height: ${bounds.height} | Position:  ${position.y}`);
-      // Right out of bounds
-      if (position.x + bounds.width > desktopWidth)
-        alert(`Bounds height: ${bounds.height} | Position:  ${position.y}`);
-    };
-    windowBoundsAdjuster();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [position, bounds?.height, bounds?.width]);
+  //     // Re-calculate new position including the delta as the changes may not have been processed yet
+  //     // Bottom out of bounds
+  //     if (position.y + bounds.height > desktopHeight)
+  //       alert(`Bounds height: ${bounds.height} | Position:  ${position.y}`);
+  //     // Right out of bounds
+  //     if (position.x + bounds.width > desktopWidth)
+  //       alert(`Bounds height: ${bounds.height} | Position:  ${position.y}`);
+  //   };
+  //   windowBoundsAdjuster();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [position, bounds?.height, bounds?.width]);
 
   useEffect(
     () => setTaskActiveStatus(app.id, !isMinimized),
@@ -112,35 +113,44 @@ const Window = ({
   );
 
   return (
-    <div ref={dragContainerRef}>
-      <Rnd
-        style={{ cursor: '' }}
-        default={{
-          x: app.x,
-          y: app.y
-        }}
-        position={{ x: position.x, y: position.y }}
-        onDragStart={() => {
-          setTaskActiveStatus(app.id, true);
-          setIsDragging(true);
-        }}
-        onResizeStart={() => setTaskActiveStatus(app.id, true)}
-        onResizeStop={(_, __, ___, ____, position) => {
-          setPosition({
-            x: position.x,
-            y: position.y
-          });
-        }}
-        onDragStop={(mouseEvent, draggableData) => {
-          setDelta({ x: draggableData.deltaX, y: draggableData.deltaY });
-          setPosition({
-            x: draggableData.x,
-            y: draggableData.y
-          });
-          setIsDragging(false);
-        }}
-        dragHandleClassName="titleBar"
-      >
+    <Rnd
+      style={{ cursor: '' }}
+      default={{
+        x: app.x,
+        y: app.y,
+        width: app.width,
+        height: app.height
+      }}
+      minWidth={app.minWidth}
+      minHeight={app.minHeight}
+      bounds="parent"
+      position={{ x: position.x, y: position.y }}
+      onDragStart={() => {
+        setTaskActiveStatus(app.id, true);
+        setIsDragging(true);
+      }}
+      onResizeStart={() => setTaskActiveStatus(app.id, true)}
+      onResizeStop={(_, __, ___, ____, position) => {
+        setTaskActiveStatus(app.id, true);
+        setPosition({
+          x: position.x,
+          y: position.y
+        });
+      }}
+      onDragStop={(mouseEvent, draggableData) => {
+        setDelta({ x: draggableData.deltaX, y: draggableData.deltaY });
+        setPosition({
+          x: draggableData.x,
+          y: draggableData.y
+        });
+        setIsDragging(false);
+      }}
+      dragHandleClassName="titleBar"
+      onMouseDown={() => setTaskActiveStatus(app.id, true)}
+    >
+      <div ref={dragContainerRef} style={{ height: '100%' }}>
+        {' '}
+        {/* ContextProvider, Window, and AppComponent will latch onto this ref */}
         <app.ApplicationContext.Provider value={{ ...app, toggleMinimize }}>
           <WindowFrame
             ref={app.windowRef}
@@ -193,8 +203,8 @@ const Window = ({
             </Portal>
           )}
         </app.ApplicationContext.Provider>
-      </Rnd>
-    </div>
+      </div>
+    </Rnd>
   );
 };
 

@@ -6,7 +6,6 @@ import Task from './Task';
 import { taskbarHeight } from 'lib/constants';
 
 const StyledTaskbar = styled.div`
-  position: fixed;
   display: flex;
   bottom: 0;
   left: 0;

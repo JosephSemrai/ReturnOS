@@ -52,6 +52,15 @@ const SystemInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+  margin: 20px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+`;
+
+const InfoText = styled.p`
+  font-size: 14px;
+  font-weight: bold;
 `;
 
 const About = () => {
@@ -75,8 +84,10 @@ const About = () => {
         {/* <Picture alt="Cina Saffary" src={isHovering ? CINA_KID : CINA} /> */}
         <SystemInfoContainer>
           <Button onClick={() => windowsAlert('Test')}>Test Alert</Button>
-          <Text style={{ color: 'black' }}>Version 0.0.1</Text>
-          <Text style={{ color: 'black' }}>Running Windowing System v2</Text>
+          <InfoText style={{ color: 'black' }}>OS Version 1.2.0</InfoText>
+          <InfoText style={{ color: 'black' }}>
+            Running Windowing System v3
+          </InfoText>
         </SystemInfoContainer>
       </Container>
     </Window>

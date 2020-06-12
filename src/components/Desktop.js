@@ -14,12 +14,14 @@ import About from 'components/About';
 import InternetTraveler from 'components/InternetTraveler';
 import Terminal from 'components/Terminal';
 import Code from './Code';
+import { taskbarHeight } from 'lib/constants';
 
 const StyledDesktop = styled.div`
   display: grid;
   grid-auto-columns: 75px;
   grid-auto-rows: 75px;
   padding: 4px 0;
+  flex: 1;
 `;
 
 const Desktop = () => {
@@ -53,14 +55,24 @@ const Desktop = () => {
   );
 
   return (
-    <>
+    // <Display>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        width: '100%'
+      }}
+    >
       <StyledDesktop>
         <DaemonLayer />
         {icons}
         {windows}
       </StyledDesktop>
+
       <Taskbar tasks={tasks} activeTask={activeTask} />
-    </>
+    </div>
+    // </Display>
   );
 };
 

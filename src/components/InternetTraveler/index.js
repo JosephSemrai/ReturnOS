@@ -6,6 +6,8 @@ export default createApplication(InternetTraveler, {
   iconLarge: require('./images/icon.png'),
   iconSmall: require('./images/icon.png'),
   canMaximize: true,
-  x: 50,
-  y: 50
+  x: 0,
+  y: 0,
+  height: 500,
+  width: 800
 });

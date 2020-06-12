@@ -9,7 +9,11 @@ const DEFAULT_APPLICATION_PROPS = {
   canClose: true,
   singleton: false,
   x: 50,
-  y: 50
+  y: 50,
+  width: 200,
+  height: 200,
+  minWidth: 200,
+  minHeight: 200
 };
 
 export const ApplicationContext = React.createContext(null);
