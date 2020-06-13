@@ -11,8 +11,8 @@ import bg1 from 'static/images/bg7.png';
 
 const Windows95 = styled.div`
   position: fixed;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   background-image: url(${bg1});
   /* background: ${win95Theme.colors.teal}; */
   color: ${win95Theme.colors.gray[3]};
