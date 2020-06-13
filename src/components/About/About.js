@@ -86,7 +86,7 @@ const About = () => {
           <Button onClick={() => windowsAlert('Test')}>Test Alert</Button>
           <InfoText style={{ color: 'black' }}>OS Version 1.2.0</InfoText>
           <InfoText style={{ color: 'black' }}>
-            Running Windowing System v3
+            Running Windowing System v3.5 (Mobile Hotfix Enabled)
           </InfoText>
         </SystemInfoContainer>
       </Container>
