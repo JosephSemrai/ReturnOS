@@ -8,6 +8,8 @@ import Button from 'components/_ui/Button';
 const Container = styled.div`
   margin: 20px;
   display: flex;
+  flex: 1;
+  flex-direction: column;
 `;
 
 const Content = styled.div`
@@ -15,7 +17,6 @@ const Content = styled.div`
   flex-direction: column;
   justify-content: center;
   text-align: left;
-  width: 220px;
   color: ${(props) => props.theme.colors.gray[0]};
 `;
 
@@ -25,6 +26,8 @@ const TableContainer = styled.div`
   text-align: left;
   padding: 2px;
   box-shadow: ${(props) => recessedBoxShadow(props.theme)};
+  overflow: auto;
+  flex: 1;
 `;
 
 const Table = styled.table`

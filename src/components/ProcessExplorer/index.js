@@ -7,5 +7,7 @@ export default createApplication(ProcessExplorer, {
   iconSmall: require('./images/icon.png'),
   canMaximize: false,
   x: 120,
-  y: 120
+  y: 120,
+  minHeight: 300,
+  minWidth: 300
 });

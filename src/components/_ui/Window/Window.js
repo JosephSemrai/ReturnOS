@@ -60,29 +60,6 @@ const Window = ({
   const [delta, setDelta] = useState();
   const dragContainerRef = useRef();
 
-  // Run the bounds adjuster every single time the position is updated
-  // useEffect(() => {
-  //   // Checks if the position of the Window combined with the bounds of the Window lead to the Window's content being displayed off screen
-  //   // If this is true, we will adjust the Window to display fully within the bounds of the screen, else we will return the values unaltered
-  //   // TODO: Move this logic into the bounds detection when moving the window so the user is unable to move the Window off of the screen
-  //   const windowBoundsAdjuster = () => {
-  //     if (!bounds || !position) return;
-
-  //     let desktopHeight = window.innerHeight - taskbarHeight;
-  //     let desktopWidth = window.innerWidth;
-
-  //     // Re-calculate new position including the delta as the changes may not have been processed yet
-  //     // Bottom out of bounds
-  //     if (position.y + bounds.height > desktopHeight)
-  //       alert(`Bounds height: ${bounds.height} | Position:  ${position.y}`);
-  //     // Right out of bounds
-  //     if (position.x + bounds.width > desktopWidth)
-  //       alert(`Bounds height: ${bounds.height} | Position:  ${position.y}`);
-  //   };
-  //   windowBoundsAdjuster();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [position, bounds?.height, bounds?.width]);
-
   useEffect(
     () => setTaskActiveStatus(app.id, !isMinimized),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -97,15 +74,10 @@ const Window = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTask, app.id]); // app.id added to dependency list, toggleMinimize excluded, possible stale closure
 
-  // const { isDragging, delta } = useDraggable(titleBarRef, {
-  //   onDragStart() {},
-  //   onDragEnd({ delta }) {}
-  // });
-
   // Change active task to the window on mousedown of the window
-  useEventListener(dragContainerRef, 'mousedown', () =>
-    setTaskActiveStatus(app.id, true)
-  );
+  useEventListener(dragContainerRef, 'mousedown', () => {
+    setTaskActiveStatus(app.id, true);
+  });
 
   // Attempt to change active task to null as we are no longer focused on the window
   useOnMousedownOutside(dragContainerRef, () =>
@@ -146,21 +118,18 @@ const Window = ({
         setIsDragging(false);
       }}
       dragHandleClassName="titleBar"
-      onMouseDown={() => setTaskActiveStatus(app.id, true)}
     >
-      <div ref={dragContainerRef} style={{ height: '100%' }}>
-        {' '}
-        {/* ContextProvider, Window, and AppComponent will latch onto this ref */}
+      {/* ContextProvider, Window, and AppComponent will latch onto this ref. Must add the display none, otherwise, we will detect clicks on the div when it is minimized, which will alert the listeners to make the window active */}
+      <div
+        ref={dragContainerRef}
+        style={{ height: '100%', display: isMinimized ? 'none' : null }}
+      >
         <app.ApplicationContext.Provider value={{ ...app, toggleMinimize }}>
           <WindowFrame
             ref={app.windowRef}
             tabIndex="0"
             isMinimized={isMinimized}
           >
-            {/* <Resizable
-          handleSize={[100, 100]}
-          resizeHandles={['ne', 'nw', 'sw', 'se']}
-        > */}
             <TitleBar
               className="titleBar"
               ref={titleBarRef}
