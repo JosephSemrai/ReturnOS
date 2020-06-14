@@ -16,9 +16,12 @@ import { ResizableBox, Resizable } from 'react-resizable';
 import { Rnd } from 'react-rnd';
 
 function useMinimize(titleBarTransitionRef) {
+  // MINIMIZING SYSTEM
+  /* Minimizing system should be triggered through `setIsTransitioning` as this will 
+  trigger the transition and, as a side effect, will toggle the minimize state. 
+  This is to allow the animation to complete before making the window disappear. */
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-
   function toggleMinimize() {
     setIsTransitioning(true);
   }
@@ -122,7 +125,10 @@ const Window = ({
       {/* ContextProvider, Window, and AppComponent will latch onto this ref. Must add the display none, otherwise, we will detect clicks on the div when it is minimized, which will alert the listeners to make the window active */}
       <div
         ref={dragContainerRef}
-        style={{ height: '100%', display: isMinimized ? 'none' : null }}
+        style={{
+          height: '100%',
+          display: isMinimized && !isTransitioning ? 'none' : null
+        }}
       >
         <app.ApplicationContext.Provider value={{ ...app, toggleMinimize }}>
           <WindowFrame
