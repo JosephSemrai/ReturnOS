@@ -88,8 +88,15 @@ const Window = ({
   );
 
   return (
+    /* Must add the display none, otherwise, we will detect clicks on the child div which has the dragContainer
+  ref when it is minimized, which will alert the listeners to make the window active.
+  We also add pointerEvents: none to allow clicks to pass through the invisible window */
     <Rnd
-      style={{ cursor: '' }}
+      style={{
+        cursor: '',
+        display: isMinimized && !isTransitioning ? 'hidden' : null,
+        pointerEvents: isMinimized && !isTransitioning ? 'none' : null
+      }}
       default={{
         x: app.x,
         y: app.y,
@@ -122,12 +129,11 @@ const Window = ({
       }}
       dragHandleClassName="titleBar"
     >
-      {/* ContextProvider, Window, and AppComponent will latch onto this ref. Must add the display none, otherwise, we will detect clicks on the div when it is minimized, which will alert the listeners to make the window active */}
+      {/* ContextProvider, Window, and AppComponent will latch onto this ref. */}
       <div
         ref={dragContainerRef}
         style={{
-          height: '100%',
-          display: isMinimized && !isTransitioning ? 'none' : null
+          height: '100%'
         }}
       >
         <app.ApplicationContext.Provider value={{ ...app, toggleMinimize }}>

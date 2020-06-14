@@ -30,7 +30,8 @@ const TitleBarTransition = React.forwardRef(
     // TODO: Figure out why bounds is set every time despite staying the same
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => setPosition(getPosition(destBounds)), []);
-    console.log('Src ref', srcRef);
+    console.log('Src ref', srcRef, srcRef.current.getBoundingClientRect());
+    console.log('Dest ref', destRef, destRef.current.getBoundingClientRect());
 
     return (
       <StyledTitleBarTransition
