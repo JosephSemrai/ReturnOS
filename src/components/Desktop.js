@@ -64,14 +64,31 @@ const Desktop = () => {
         width: '100%'
       }}
     >
-      <StyledDesktop>
-        <DaemonLayer />
-        {icons}
-        {windows}
-      </StyledDesktop>
+      <div
+        style={{
+          position: 'relative',
+          height: '100%',
+          width: '100%',
+          flex: 1
+        }}
+      >
+        <div
+          style={{
+            position: 'relative',
+            height: '100%',
+            width: '100%',
+            flex: 1
+          }}
+        >
+          <DaemonLayer />
+          <StyledDesktop>{icons}</StyledDesktop>
+          {windows}
+        </div>
+      </div>
 
       <Taskbar tasks={tasks} activeTask={activeTask} />
     </div>
+    //{' '}
     // </Display>
   );
 };

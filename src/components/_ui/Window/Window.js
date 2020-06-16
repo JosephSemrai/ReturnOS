@@ -52,6 +52,7 @@ const Window = ({
   const { activeTask, setTaskActiveStatus } = useTaskManager();
   const app = useApplicationContext();
   // const bounds = useBoundingRect(app.windowRef);
+  const resizableRef = useRef();
   const titleBarRef = useRef();
   const activeWindowRef = useRef();
   const titleBarTransitionRef = useRef();
@@ -63,6 +64,21 @@ const Window = ({
   const [delta, setDelta] = useState();
   const dragContainerRef = useRef();
 
+  /**
+   * MAXIMIZE SECTION
+   */
+  const toggleMaximize = () => {
+    const resizableContainer = resizableRef.current;
+    if (!resizableContainer) return;
+
+    resizableContainer.updateSize({ width: '100%', height: '100%' });
+    // resizableContainer.updatePosition({ x: 1, y: 1 });
+  };
+
+  /**
+   * MINIMIZE SECTION
+   * ! Minimizing is triggered through a toggling of transition state
+   */
   useEffect(
     () => setTaskActiveStatus(app.id, !isMinimized),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -77,6 +93,10 @@ const Window = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTask, app.id]); // app.id added to dependency list, toggleMinimize excluded, possible stale closure
 
+  /**
+   * MOUSE HANDLER SECTION
+   * Handler for active task management when clicking on and off the windows
+   */
   // Change active task to the window on mousedown of the window
   useEventListener(dragContainerRef, 'mousedown', () => {
     setTaskActiveStatus(app.id, true);
@@ -92,6 +112,7 @@ const Window = ({
   ref when it is minimized, which will alert the listeners to make the window active.
   We also add pointerEvents: none to allow clicks to pass through the invisible window */
     <Rnd
+      ref={resizableRef}
       style={{
         cursor: '',
         display: isMinimized && !isTransitioning ? 'hidden' : null,
@@ -136,7 +157,9 @@ const Window = ({
           height: '100%'
         }}
       >
-        <app.ApplicationContext.Provider value={{ ...app, toggleMinimize }}>
+        <app.ApplicationContext.Provider
+          value={{ ...app, toggleMinimize, toggleMaximize }}
+        >
           <WindowFrame
             ref={app.windowRef}
             tabIndex="0"
@@ -149,7 +172,6 @@ const Window = ({
               title={title + '| ' + position.x + ', ' + position.y}
               buttons={titlebarButtons}
               icon={icon}
-              onMinimize={toggleMinimize}
             />
             {menuItems ? (
               <MenuBar>
