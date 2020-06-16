@@ -4,7 +4,7 @@ import Window from 'components/_ui/Window/Window';
 import Text, { TitleText } from 'components/_ui/Text';
 import Button from 'components/_ui/Button';
 import useAlert from 'lib/useAlert';
-import retroOcean from 'static/images/retroOcean.jpg';
+import retroOcean from 'static/images/tropicalGif.gif';
 import ditherBackground from 'lib/ditherBackground';
 
 // const Picture = styled.img`
@@ -24,11 +24,13 @@ const Container = styled.div`
 const Heading = styled.h1`
   font-size: 24px;
   color: white;
+  margin-bottom: 0;
 `;
 
 const SubHeading = styled.h2`
   font-size: 18px;
   color: white;
+  font-weight: normal;
 `;
 
 const LogoContainer = styled.div`
@@ -53,14 +55,23 @@ const SystemInfoContainer = styled.div`
   flex-direction: column;
   flex: 1;
   margin: 20px;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
+  text-align: left;
+  justify-content: flex-start;
+  align-items: flex-start;
 `;
 
 const InfoText = styled.p`
-  font-size: 14px;
+  margin: 0px;
+  margin-left: 20px;
+  font-size: 13px;
+  color: black;
+`;
+
+const InfoCategory = styled.p`
+  font-size: 13px;
+  margin-bottom: 4px;
   font-weight: bold;
+  color: black;
 `;
 
 const About = () => {
@@ -78,20 +89,19 @@ const About = () => {
         <LogoContainer>
           {/* Built in an effort to return to{' '}
             <Link ref={hoverRef}>simpler times</Link> by */}
-          <TitleText as={Heading}>ReturnOS</TitleText>
+          <Heading>ReturnOS</Heading>
           <SubHeading>Alpha Build</SubHeading>
         </LogoContainer>
         {/* <Picture alt="Cina Saffary" src={isHovering ? CINA_KID : CINA} /> */}
         <SystemInfoContainer>
           <Button onClick={() => windowsAlert('Test')}>Test Alert</Button>
-          <InfoText style={{ color: 'black' }}>OS Version 1.2.0</InfoText>
-          <InfoText style={{ color: 'black' }}>
-            Running Windowing System v4
-            <br />
-            (Mobile Hotfix Enabled)
-            <br />
-            (Maximize Beta Enabled)
-          </InfoText>
+          <InfoCategory>System Information:</InfoCategory>
+          <InfoText>OS Version 1.2.0</InfoText>
+          <InfoText>Running Windowing System v4</InfoText>
+
+          <InfoCategory>Enabled Experimental Features:</InfoCategory>
+          <InfoText>Minimize Hotfix</InfoText>
+          <InfoText>Window Maximization Beta</InfoText>
         </SystemInfoContainer>
       </Container>
     </Window>
