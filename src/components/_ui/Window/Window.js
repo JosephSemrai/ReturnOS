@@ -72,7 +72,7 @@ const Window = ({
     if (!resizableContainer) return;
 
     resizableContainer.updateSize({ width: '100%', height: '100%' });
-    // resizableContainer.updatePosition({ x: 1, y: 1 });
+    setPosition({ x: 0, y: 0 });
   };
 
   /**
