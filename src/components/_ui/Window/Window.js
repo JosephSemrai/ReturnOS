@@ -124,6 +124,7 @@ const Window = ({
         width: app.width,
         height: app.height
       }}
+      enableResizing={app.canResize}
       minWidth={app.minWidth}
       minHeight={app.minHeight}
       bounds="parent"

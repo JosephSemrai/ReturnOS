@@ -20,9 +20,12 @@ function useAlert() {
       iconLarge: require('../components/Alert/images/icon-lg.png'),
       iconSmall: require('../components/Alert/images/icon-sm.png'),
       canMaximize: true,
-      x: desktopWidth / 2 - 100,
+      minWidth: 400,
+      minHeight: 200,
+      x: desktopWidth / 2 - 200,
       y: desktopHeight / 2 - 100,
-      alertMessage
+      alertMessage,
+      canResize: false
     });
 
     createTask({ application: alertApp });

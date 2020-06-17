@@ -7,6 +7,7 @@ const DEFAULT_APPLICATION_PROPS = {
   canMinimize: true,
   canMaximize: true,
   canClose: true,
+  canResize: true,
   singleton: false,
   x: 50,
   y: 50,
@@ -27,6 +28,10 @@ function createApplication(
   applicationProps = DEFAULT_APPLICATION_PROPS
 ) {
   applicationProps = { ...DEFAULT_APPLICATION_PROPS, ...applicationProps };
+
+  // Rounds the pixel/position values to avoid rendering issues when rendering in between a pixel
+  applicationProps.x = Math.round(applicationProps.x);
+  applicationProps.y = Math.round(applicationProps.y);
   const AppComponent = (runtimeProps = {}) => {
     // Usually is given runtimeProps by the task manager
     return (
