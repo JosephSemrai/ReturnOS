@@ -10,6 +10,8 @@ const StyledTaskbar = styled.div`
   left: 0;
   right: 0;
   height: ${taskbarHeight}px;
+  min-height: ${taskbarHeight}px;
+  flex-basis: ${taskbarHeight}px;
   padding-top: 2px;
   display: flex;
   background: ${(props) => props.theme.colors.gray[2]};

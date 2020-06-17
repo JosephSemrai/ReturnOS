@@ -15,6 +15,17 @@ import { taskbarHeight } from 'lib/constants';
 import { ResizableBox, Resizable } from 'react-resizable';
 import { Rnd } from 'react-rnd';
 
+const allResizeEnableObject = {
+  bottom: true,
+  bottomLeft: true,
+  bottomRight: true,
+  left: true,
+  right: true,
+  top: true,
+  topLeft: true,
+  topRight: true
+};
+
 function useMinimize(titleBarTransitionRef) {
   // MINIMIZING SYSTEM
   /* Minimizing system should be triggered through `setIsTransitioning` as this will 
@@ -124,7 +135,7 @@ const Window = ({
         width: app.width,
         height: app.height
       }}
-      enableResizing={app.canResize}
+      enableResizing={app.canResize ? allResizeEnableObject : null}
       minWidth={app.minWidth}
       minHeight={app.minHeight}
       bounds="parent"

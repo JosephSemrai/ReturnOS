@@ -19,7 +19,7 @@ function useAlert() {
       title: 'Alert',
       iconLarge: require('../components/Alert/images/icon-lg.png'),
       iconSmall: require('../components/Alert/images/icon-sm.png'),
-      canMaximize: true,
+      canMaximize: false,
       minWidth: 400,
       minHeight: 200,
       x: desktopWidth / 2 - 200,
