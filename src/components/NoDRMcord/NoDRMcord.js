@@ -4,6 +4,7 @@ import Window from 'components/_ui/Window/Window';
 
 import Button from 'components/_ui/Button';
 import InputBox from 'components/_ui/InputBox';
+import CatalystChat from 'catalyst-vc-react';
 
 const ActionBar = styled.div`
   display: flex;
@@ -73,7 +74,8 @@ const InternetTraveler = () => {
         </ActionBar>
 
         <PageViewContainer>
-          <PageView src={statefulURL} />
+          {/* <PageView src={statefulURL} /> */}
+          <CatalystChat room="ARCHING_OUT" appId="ARCHING_OUT" />
         </PageViewContainer>
       </Container>
     </Window>

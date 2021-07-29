@@ -16,6 +16,7 @@ import Terminal from 'components/Terminal';
 import Code from './Code';
 import { taskbarHeight } from 'lib/constants';
 import NoDRMcord from './NoDRMcord';
+import BlunderTracker from './BlunderTracker';
 
 const StyledDesktop = styled.div`
   display: grid;
@@ -41,6 +42,9 @@ const Desktop = () => {
 
       <ApplicationIcon application={NoDRMcord} />
       <ApplicationIcon application={InternetTraveler} />
+
+      <ApplicationIcon application={BlunderTracker} />
+
       <ApplicationIcon application={Terminal} />
       <ApplicationIcon application={Code} />
       <ApplicationIcon application={About} />
