@@ -29,7 +29,9 @@ const StyledStartButton = styled(TaskbarButton)`
 `;
 
 const StartButton = () => {
-  const startupSound = useAudio(require('../../../static/sounds/ustartup.wav'));
+  const startupSound = useAudio(
+    require('../../../static/sounds/adam_weird.mp3')
+  );
   const onClick = useCallback(
     () => (startupSound.paused ? startupSound.play() : startupSound.load()),
     [startupSound]

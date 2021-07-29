@@ -7,7 +7,7 @@ import TaskManager from 'components/TaskManager';
 import useMouseButtonIdentifier from 'lib/useMouseButtonIdentifier';
 import usePreventImageDrag from 'lib/usePreventImageDrag';
 // import oceanBackground from 'static/images/retroOcean.jpg';
-import ufo from 'static/images/redSky.jpg';
+import ufo from 'static/images/adam2.png';
 
 const Windows95 = styled.div`
   position: fixed;

@@ -15,6 +15,7 @@ import InternetTraveler from 'components/InternetTraveler';
 import Terminal from 'components/Terminal';
 import Code from './Code';
 import { taskbarHeight } from 'lib/constants';
+import NoDRMcord from './NoDRMcord';
 
 const StyledDesktop = styled.div`
   display: grid;
@@ -35,22 +36,24 @@ const Desktop = () => {
   const icons = (
     <>
       <DaemonLayer />
-      <ApplicationIcon application={Minesweeper} />
       <ApplicationIcon application={ProcessExplorer} />
+      <ApplicationIcon application={Minesweeper} />
+
+      <ApplicationIcon application={NoDRMcord} />
       <ApplicationIcon application={InternetTraveler} />
       <ApplicationIcon application={Terminal} />
       <ApplicationIcon application={Code} />
       <ApplicationIcon application={About} />
       <IconWithLabel
-        icon={require('components/About/images/github.png')}
-        title="Alert"
-        onOpen={() => windowsAlert('test')}
+        icon={require('static/images/adam.png')}
+        title="Adam Mom Pics"
+        onOpen={() => windowsAlert('why u looking')}
       />
-      <IconWithLabel
+      {/* <IconWithLabel
         icon={require('components/About/images/github.png')}
         title="GitHub Repo"
         onOpen={() => window.open('https://github.com/josephsemrai/ReturnOS')}
-      />
+      /> */}
     </>
   );
 

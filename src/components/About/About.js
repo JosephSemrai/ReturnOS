@@ -89,7 +89,7 @@ const About = () => {
         <LogoContainer>
           {/* Built in an effort to return to{' '}
             <Link ref={hoverRef}>simpler times</Link> by */}
-          <Heading>ReturnOS</Heading>
+          <Heading>ArchOS</Heading>
           <SubHeading>Alpha Build</SubHeading>
         </LogoContainer>
         {/* <Picture alt="Cina Saffary" src={isHovering ? CINA_KID : CINA} /> */}

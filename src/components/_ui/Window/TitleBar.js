@@ -13,8 +13,12 @@ const StyledTitleBar = styled.div`
   color: ${(props) =>
     props.active ? props.theme.colors.gray[3] : props.theme.colors.gray[2]};
   background: ${(props) =>
-    props.active ? props.theme.colors.navy : props.theme.colors.gray[1]};
+    props.active
+      ? 'linear-gradient(90deg, rgba(255,113,206,1) 0%, rgba(185,103,255,1) 100%)'
+      : props.theme.colors.gray[1]};
 `;
+
+//linear-gradient(90deg, rgba(255,113,206,1) 0%, rgba(1,205,254,1) 54%, rgba(12,207,249,1) 89%, rgba(185,103,255,1) 100%);
 
 const Icon = styled.img`
   width: 16px;
